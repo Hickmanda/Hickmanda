@@ -37,4 +37,4 @@ End-to-end MLOps pipeline: XGBoost + MLflow + FastAPI + Docker, trained on 1M si
 
 ## 📊 GitHub Stats
 
-![Daniil's GitHub stats](https://github-readme-stats.vercel.app/api?username=Hickmanda&show_icons=true&theme=default)
+![Daniil's GitHub stats](https://github-readme-streak-stats.herokuapp.com/?user=Hickmanda&theme=default)
