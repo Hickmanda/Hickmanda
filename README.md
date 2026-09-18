@@ -32,9 +32,3 @@ End-to-end MLOps pipeline: XGBoost + MLflow + FastAPI + Docker, trained on 1M si
 **Frameworks:** Flask, FastAPI, Mesa, Streamlit  
 **ML/Data:** XGBoost, scikit-learn, MLflow, NumPy, Pandas  
 **Tools:** Docker, Git, GitHub Actions, PostgreSQL, pytest
-
----
-
-## 📊 GitHub Stats
-
-![Daniil's GitHub stats](https://github-readme-streak-stats.herokuapp.com/?user=Hickmanda&theme=default)
