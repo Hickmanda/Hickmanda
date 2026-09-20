@@ -44,3 +44,20 @@ nav.dock a,nav.dock button{display:flex;align-items:center;justify-content:cente
 .hero .badge-area{animation:none;overflow:visible}.lanyard{overflow:visible}.lanyard path{stroke-linecap:butt}
 
 
+
+/* Extend the animated hero behind the side dock and keep dock labels intact. */
+nav.dock a{white-space:nowrap}
+@media(min-width:761px){
+  .hero:before,.hero:after,#ambient-canvas,.hero .aurora{right:-168px;width:calc(100% + 168px)}
+  nav.dock{max-width:110px}
+  nav.dock a{width:82px}
+}
+
+
+
+/* Keep the animated network background alive across every section. */
+body{position:relative}
+main,footer{position:relative;z-index:1}
+#ambient-canvas.global-ambient{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;z-index:0!important;opacity:.72;pointer-events:none}
+
+
