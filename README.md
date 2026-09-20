@@ -1,4 +1,4 @@
-[![Daniil Marchici — Software, Simulation, AI](assets/portfolio-banner.svg)](https://daniil-portfolio.onrender.com)
+[![Daniil Marchici — Software, Simulation, AI](assets/portfolio-banner.svg?v=2)](https://daniil-portfolio.onrender.com)
 
 [Open my interactive portfolio →](https://daniil-portfolio.onrender.com)
 
