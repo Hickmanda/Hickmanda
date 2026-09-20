@@ -1,3 +1,7 @@
+[![Daniil Marchici — Software, Simulation, AI](assets/portfolio-banner.svg)](https://daniil-marchici.roman197980.chatgpt.site)
+
+[Open my interactive portfolio →](https://daniil-marchici.roman197980.chatgpt.site)
+
 # Hi, I'm Daniil 👋
 
 🎓 Aspiring Computer Science student from Moldova  
