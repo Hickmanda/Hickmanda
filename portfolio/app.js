@@ -11,7 +11,7 @@
   const strapLength = 248;
   let anchorY = -120, entryDistance = 650, entryOffset = 0, entryProgress = paused ? 1 : 0;
   let x = paused ? 0 : 38, y = paused ? 0 : -24, vx = 0, vy = 0, tilt = paused ? 0 : -12;
-  let dragging = false, pointerId = null, moved = false, last = 0, frame = null, visible = true;
+  let dragging = false, pointerId = null, moved = false, last = 0, frame = null, ambientLast = 0, visible = true;
   let startX = 0, startY = 0, originX = 0, originY = 0, flipped = false, lastScroll = window.scrollY;
   const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
   function measureSuspension() {
@@ -27,10 +27,10 @@
   document.body.appendChild(canvas);
   const ctx = canvas.getContext('2d');
   let canvasW = 1, canvasH = 1, pointer = { x: -1000, y: -1000 };
-  const points = Array.from({ length: 58 }, (_, i) => ({ u: ((i * 73 + 17) % 101) / 101, v: ((i * 37 + 11) % 97) / 97, phase: i * 2.4, r: i % 4 === 0 ? 1.8 : 1 }));
+  const points = Array.from({ length: 42 }, (_, i) => ({ u: ((i * 73 + 17) % 101) / 101, v: ((i * 37 + 11) % 97) / 97, phase: i * 2.4, r: i % 4 === 0 ? 1.8 : 1 }));
   function resizeCanvas() {
     canvasW = canvas.clientWidth || hero.clientWidth; canvasH = canvas.clientHeight || hero.clientHeight;
-    const ratio = Math.min(devicePixelRatio || 1, 1.5);
+    const ratio = 1;
     canvas.width = Math.round(canvasW * ratio); canvas.height = Math.round(canvasH * ratio);
     ctx.setTransform(ratio, 0, 0, ratio, 0, 0); drawAmbient(0);
   }
@@ -39,7 +39,7 @@
     const t = paused ? 0 : time * .00032;
     for (let wave = 0; wave < 5; wave++) {
       ctx.beginPath();
-      for (let px = 0; px <= canvasW; px += 12) {
+      for (let px = 0; px <= canvasW; px += 16) {
         const py = canvasH * (.14 + wave * .18) + Math.sin(px / canvasW * 5 + t + wave) * 38 + Math.sin(px / canvasW * 9 - t * .8) * 12;
         if (px === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
       }
@@ -54,9 +54,9 @@
     coords.forEach((p, i) => {
       for (let j = i + 1; j < coords.length; j++) {
         const q = coords[j], d = Math.hypot(p.x - q.x, p.y - q.y);
-        if (d < 145) {
-          ctx.strokeStyle = `rgba(171,178,229,${(1 - d / 145) * .24})`; ctx.lineWidth = .7; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
-          if ((i + j) % 5 === 0) { const travel = (t * .42 + i * .13) % 1; const fade = Math.sin(travel * Math.PI) * (1 - d / 145); ctx.fillStyle = `rgba(219,201,255,${fade * .65})`; ctx.beginPath(); ctx.arc(p.x + (q.x - p.x) * travel, p.y + (q.y - p.y) * travel, 1.7, 0, Math.PI * 2); ctx.fill(); }
+        if (d < 132) {
+          ctx.strokeStyle = `rgba(171,178,229,${(1 - d / 132) * .24})`; ctx.lineWidth = .7; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+          if ((i + j) % 6 === 0) { const travel = (t * .42 + i * .13) % 1; const fade = Math.sin(travel * Math.PI) * (1 - d / 132); ctx.fillStyle = `rgba(219,201,255,${fade * .65})`; ctx.beginPath(); ctx.arc(p.x + (q.x - p.x) * travel, p.y + (q.y - p.y) * travel, 1.7, 0, Math.PI * 2); ctx.fill(); }
         }
       }
       ctx.fillStyle = i % 3 === 0 ? 'rgba(128,225,207,.5)' : 'rgba(186,160,255,.38)'; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
@@ -98,7 +98,7 @@
       vy = (vy + (targetY - y) * .023 * dt) * Math.pow(.88, dt);
       x += vx * dt; y += vy * dt;
     }
-    draw(); drawAmbient(time); frame = requestAnimationFrame(animate);
+    draw(); if (time - ambientLast > 32) { drawAmbient(time); ambientLast = time; } frame = requestAnimationFrame(animate);
   }
   function start() { if (!frame && !paused && visible && !document.hidden) { last = 0; frame = requestAnimationFrame(animate); } }
   function release() {
@@ -179,6 +179,7 @@
   window.addEventListener('scroll', () => { if (!navQueued) { navQueued = true; requestAnimationFrame(() => { updateNav(); navQueued = false; }); } }, { passive: true });
   measureSuspension(); resizeCanvas(); updateNav(); updateMotion(); draw(); start();
 })();
+
 
 
 
