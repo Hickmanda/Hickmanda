@@ -1,6 +1,6 @@
-[![Daniil Marchici — Software, Simulation, AI](assets/portfolio-banner.svg)](https://daniil-marchici.roman197980.chatgpt.site)
+[![Daniil Marchici — Software, Simulation, AI](assets/portfolio-banner.svg)](https://daniil-portfolio.onrender.com)
 
-[Open my interactive portfolio →](https://daniil-marchici.roman197980.chatgpt.site)
+[Open my interactive portfolio →](https://daniil-portfolio.onrender.com)
 
 # Hi, I'm Daniil 👋
 
