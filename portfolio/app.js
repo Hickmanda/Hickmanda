@@ -5,9 +5,7 @@
   const strap = ['strap', 'strap-shadow', 'strap-stitch'].map(id => document.getElementById(id));
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const motionToggle = document.querySelector('#motion-toggle');
-  let savedMotion = null;
-  try { savedMotion = sessionStorage.getItem('portfolio-motion'); } catch {}
-  let paused = savedMotion ? savedMotion === 'paused' : reduced.matches;
+  let paused = false;
   let spin = 0;
   let tiltVelocity = 0, spinVelocity = 0;
   const strapLength = 248;
@@ -181,6 +179,7 @@
   window.addEventListener('scroll', () => { if (!navQueued) { navQueued = true; requestAnimationFrame(() => { updateNav(); navQueued = false; }); } }, { passive: true });
   measureSuspension(); resizeCanvas(); updateNav(); updateMotion(); draw(); start();
 })();
+
 
 
 
