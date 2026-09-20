@@ -25,11 +25,13 @@
     if (entryProgress === 0) entryOffset = -entryDistance;
   }
   const canvas = document.querySelector('#ambient-canvas');
+  canvas.classList.add('global-ambient');
+  document.body.appendChild(canvas);
   const ctx = canvas.getContext('2d');
   let canvasW = 1, canvasH = 1, pointer = { x: -1000, y: -1000 };
   const points = Array.from({ length: 58 }, (_, i) => ({ u: ((i * 73 + 17) % 101) / 101, v: ((i * 37 + 11) % 97) / 97, phase: i * 2.4, r: i % 4 === 0 ? 1.8 : 1 }));
   function resizeCanvas() {
-    canvasW = hero.clientWidth; canvasH = hero.clientHeight;
+    canvasW = canvas.clientWidth || hero.clientWidth; canvasH = canvas.clientHeight || hero.clientHeight;
     const ratio = Math.min(devicePixelRatio || 1, 1.5);
     canvas.width = Math.round(canvasW * ratio); canvas.height = Math.round(canvasH * ratio);
     ctx.setTransform(ratio, 0, 0, ratio, 0, 0); drawAmbient(0);
@@ -179,4 +181,6 @@
   window.addEventListener('scroll', () => { if (!navQueued) { navQueued = true; requestAnimationFrame(() => { updateNav(); navQueued = false; }); } }, { passive: true });
   measureSuspension(); resizeCanvas(); updateNav(); updateMotion(); draw(); start();
 })();
+
+
 
